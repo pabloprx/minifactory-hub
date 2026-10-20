@@ -35,7 +35,7 @@ export default async function SlicerPage({ searchParams }: { searchParams: Promi
     <>
       <PageHeader title={t('slicer.slicer')} subtitle={<>{t('slicer.engineLabel')} <b>{orcaAvailable() ? t('slicer.orcaslicer', { engine }) : t('slicer.notInstalled')}</b>. {t('slicer.engineNote')}</>}
         actions={<><Link href="/laminador/configurar" className="btn-primary" data-testid="setup-open">{t('slicer.setUpSlicing')}</Link>{can(user, 'laminador', 'C') && tab === 'perfiles' && <ImportPresetsButton />}</>} />
-      {!orcaAvailable() && <div className="rounded-lg box-warn p-3 text-sm mb-4">{t('slicer.orcaMissing', { cmd: 'npm run orca:install' })}</div>}
+      {!orcaAvailable() && <div className="rounded-lg box-warn p-3 text-sm mb-4">{t('slicer.orcaMissing', { cmd: 'pnpm run orca:install' })}</div>}
       <Tabs current={tab} tabs={[{ key: 'perfiles', label: t('slicer.tabProfiles'), href: '/laminador' }, { key: 'comparar', label: t('slicer.tabComparator'), href: '/laminador?tab=comparar' }, { key: 'laminados', label: t('slicer.tabSlices'), href: '/laminador?tab=laminados' }]} />
       {tab === 'perfiles' && (
         <div className="space-y-5">

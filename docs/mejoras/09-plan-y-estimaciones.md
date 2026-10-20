@@ -215,7 +215,7 @@ flowchart LR
 
 ## 6. Criterios de aceptación por release (resumen)
 
-- **Calidad técnica:** `npm run typecheck`, `npm test` y `npm run test:e2e` en verde; axe sin violaciones nuevas.
+- **Calidad técnica:** `pnpm run typecheck`, `pnpm test` y `pnpm run test:e2e` en verde; axe sin violaciones nuevas.
 - **Datos:** migraciones reversibles o con respaldo; sin pérdida de presupuestos/pedidos/corridas históricas.
 - **UX:** pantallas en claro/oscuro, escritorio y móvil con capturas actualizadas en `docs/reporte`.
 - **Rendimiento:** listas de 1 000 elementos fluidas; ningún bloqueo de la web durante laminado (R5).

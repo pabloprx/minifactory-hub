@@ -11,9 +11,9 @@ delete (env as any).ADMIN_EMAIL;
 
 test.beforeAll(async () => {
   fs.rmSync(DIR, { recursive: true, force: true }); fs.mkdirSync(DIR, { recursive: true });
-  const out = execSync('npx tsx scripts/seed.ts --bootstrap-only', { env, encoding: 'utf8' });
+  const out = execSync('pnpm exec tsx scripts/seed.ts --bootstrap-only', { env, encoding: 'utf8' });
   token = out.match(/código: ([A-Z0-9]{12})/)?.[1] ?? ''; expect(token).toHaveLength(12);
-  srv = spawn('npx', ['next', 'start', '-p', String(PORT)], { env: { ...env, NODE_ENV: 'production' }, stdio: 'ignore', detached: true });
+  srv = spawn('pnpm', ['exec', 'next', 'start', '-p', String(PORT)], { env: { ...env, NODE_ENV: 'production' }, stdio: 'ignore', detached: true });
   for (let i = 0; i < 60; i++) { try { const r = await fetch(`http://localhost:${PORT}/login`, { redirect: 'manual' }); if (r.status) break; } catch { /* aún no */ } await new Promise((r) => setTimeout(r, 1000)); }
 });
 test.afterAll(() => { try { if (srv?.pid) process.kill(-srv.pid, 'SIGKILL'); } catch { /* ya terminó */ } });

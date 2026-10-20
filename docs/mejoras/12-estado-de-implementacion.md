@@ -107,10 +107,10 @@ Migraciones nuevas: `0013` jobs · `0014` quality_presets · `0015`/`0016` vínc
 | P5 comparar A/B | ✅ | Estudio: base y ajustes lado a lado |
 | P5 SSE | ✅ | `/api/runs/stream` con respaldo de sondeo |
 | P5 asesor de IA en el Estudio | ✅ | Los candidatos se lamina con ajustes de sesión sobre el perfil real: ya no se crean perfiles ocultos |
-| P5 esquema ampliado | ✅ | `npm run orca:install` genera `data/orca-schema.json` (≈450 claves) desde el código fuente de OrcaSlicer; no se versiona (AGPL). Entran como página «Otros (OrcaSlicer)», nivel Experto, con el texto en inglés de Orca |
-| P5 worker aislado | ✅ | `MF_EXTERNAL_WORKER=1` + `npm run worker` (servicio `worker` en docker-compose); requiere Postgres |
+| P5 esquema ampliado | ✅ | `pnpm run orca:install` genera `data/orca-schema.json` (≈450 claves) desde el código fuente de OrcaSlicer; no se versiona (AGPL). Entran como página «Otros (OrcaSlicer)», nivel Experto, con el texto en inglés de Orca |
+| P5 worker aislado | ✅ | `MF_EXTERNAL_WORKER=1` + `pnpm run worker` (servicio `worker` en docker-compose); requiere Postgres |
 | P5 estimación rápida | ✅ | En el Estudio, mientras Orca calcula, se muestra una estimación aproximada desde la malla |
-| P6 | ◐ | Regresión visual con líneas base (`npm run test:visual`, opt-in), cajas de aviso semánticas (`box-warn`/`box-danger`), etiqueta de resina en la cola. Quedan colores literales de chips y el barrido de Reportes |
+| P6 | ◐ | Regresión visual con líneas base (`pnpm run test:visual`, opt-in), cajas de aviso semánticas (`box-warn`/`box-danger`), etiqueta de resina en la cola. Quedan colores literales de chips y el barrido de Reportes |
 
 ## Decisiones técnicas que conviene revisar
 1. **Compatibilidad hacia atrás por encima de la limpieza:** nada se eliminó (columnas heredadas, modelo de precios histórico, `taxMode`). Cada «contraer» necesita su propia migración con vista previa.

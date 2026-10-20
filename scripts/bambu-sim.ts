@@ -8,7 +8,7 @@
  *  - Cámara P1/A1: TLS con el paquete de autenticación de 80 bytes y cuadros JPEG con cabecera de 16 bytes
  *  - FTPS implícito: USER/PASS, PBSZ/PROT, EPSV/PASV, STOR, LIST/MLSD
  *
- * Uso: npx tsx scripts/bambu-sim.ts   (variables: BAMBU_SIM_SSDP_TARGETS=127.0.0.1:2021)
+ * Uso: pnpm exec tsx scripts/bambu-sim.ts   (variables: BAMBU_SIM_SSDP_TARGETS=127.0.0.1:2021)
  */
 import tls from 'node:tls';
 import net from 'node:net';

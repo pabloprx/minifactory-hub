@@ -1,0 +1,14 @@
+# Configuración de pnpm.
+
+# Igual que npm 7+: instala las dependencias peer (vitest necesita vite así).
+autoInstallPeers: true
+
+# Protección de la cadena de suministro.
+# No resuelve una versión hasta que tenga 7 días publicada.
+minimumReleaseAge: 10080
+# La instalación falla si una dependencia nueva quiere ejecutar un script de instalación.
+strictDepBuilds: true
+# Dependencias que pueden ejecutar scripts de instalación. Revisar antes de agregar una.
+# esbuild: el postinstall verifica y enlaza su binario de plataforma (lo usan tsx, drizzle-kit y vite).
+onlyBuiltDependencies:
+  - esbuild

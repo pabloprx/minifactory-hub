@@ -32,7 +32,7 @@ export const advisor: Shape<typeof es> = {
     pickProcessForMachine: 'Pick a profile made for that printer and nozzle, or set it up again in Slicer → Set up slicing.',
     timeout: 'Slicing took too long and was stopped.',
     timeoutCopies: 'Try fewer copies, a simpler mesh, or ask the administrator to raise ORCA_TIMEOUT_S.',
-    notInstalled: 'OrcaSlicer is not installed on the server. Ask the administrator to run “npm run orca:install”.',
+    notInstalled: 'OrcaSlicer is not installed on the server. Ask the administrator to run “pnpm run orca:install”.',
     askAi: 'Explain with AI',
     asking: 'Analyzing…',
     aiTitle: 'AI explanation',

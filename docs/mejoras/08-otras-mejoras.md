@@ -6,7 +6,7 @@ Mejoras adicionales encontradas durante el análisis, fuera de los cinco ejes pe
 
 | ID | Mejora | Prioridad | Hallazgo | Esfuerzo orient. |
 |---|---|---|---|---|
-| **OM-01** | **Página «Salud del sistema»** en Configuración: estado de OrcaSlicer (versión), Chromium (PDF), ffmpeg (cámara RTSP), almacenamiento (espacio), base de datos, conectores Bambu. Con acciones de reparación guiada (`npm run orca:install`, etc.). Un `/api/health` equivalente para Docker | Alta | PDF-01/02, TEC-03 | 1–1,5 d |
+| **OM-01** | **Página «Salud del sistema»** en Configuración: estado de OrcaSlicer (versión), Chromium (PDF), ffmpeg (cámara RTSP), almacenamiento (espacio), base de datos, conectores Bambu. Con acciones de reparación guiada (`pnpm run orca:install`, etc.). Un `/api/health` equivalente para Docker | Alta | PDF-01/02, TEC-03 | 1–1,5 d |
 | **OM-02** | **Cola de trabajos genérica** (`jobs`): laminado, procesamiento de archivos, miniaturas, PDF; reintentos, registro de errores, reanudación tras reinicio, vista de «Procesos en segundo plano» con indicador global en la barra superior | Alta | BIB-02, TEC-01 | 3–4 d (compartido con 2.1/5.4 del plan) |
 | **OM-03** | **Completar la guarda de borrado:** el bloqueo con lista de dependencias ya existe para perfiles (`lib/slicer/usage.ts`); falta **«reemplazar por…»/archivar** y cubrir materiales y líneas de presupuesto/productos | Media | PFC-05 (resuelto en parte) | 0,5–1 d |
 | **OM-04** | **Notificaciones de laminado terminado** (notificación interna + toast global si el usuario navegó a otra pantalla) | Media | VIS-03 | 0,5–1 d |

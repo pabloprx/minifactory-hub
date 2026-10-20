@@ -1,6 +1,6 @@
 /**
  * Proveedor de IA simulado para desarrollo y pruebas e2e (sin red ni costo).
- *   npx tsx scripts/ai-sim.ts            → http://127.0.0.1:18090
+ *   pnpm exec tsx scripts/ai-sim.ts            → http://127.0.0.1:18090
  * En Configuración → Inteligencia artificial elige «Compatible con OpenAI», URL http://127.0.0.1:18090/v1
  * (o «Anthropic» con URL http://127.0.0.1:18090). Cualquier clave sirve; la clave «mala» devuelve 401.
  * Responde {"ok":true} a las pruebas de conexión; con el encabezado x-sim-fail=429|500 simula errores.

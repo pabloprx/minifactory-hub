@@ -2,7 +2,7 @@ import type { ParamDef, ParamKind, ParamType } from './params';
 
 /**
  * Generador del esquema ampliado de parámetros a partir del código fuente de OrcaSlicer (PrintConfig.cpp y Preset.cpp).
- * OrcaSlicer es AGPL-3.0: este texto NO se versiona; `npm run orca:install` lo genera en el directorio de datos de cada instalación.
+ * OrcaSlicer es AGPL-3.0: este texto NO se versiona; `pnpm run orca:install` lo genera en el directorio de datos de cada instalación.
  */
 export interface RawOption { key: string; coType: string; label?: string; tooltip?: string; sidetext?: string; min?: number; max?: number; enums?: string[]; category?: string }
 

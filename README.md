@@ -236,24 +236,24 @@ Está apagada por defecto. Si quieres usarla, se activa dentro de la aplicación
 Para desarrollar o para instalar directo en el sistema (sin contenedores):
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env            # cambia SESSION_SECRET
-npm run orca:install            # descarga OrcaSlicer 2.4.2 en .orca/ (laminador; ~200 MB) y genera el esquema ampliado de parámetros en data/
-npm run db:seed -- --reset      # base de datos con datos de demostración
-npm run build && npm start      # http://localhost:3000
+pnpm run orca:install           # descarga OrcaSlicer 2.4.2 en .orca/ (laminador; ~200 MB) y genera el esquema ampliado de parámetros en data/
+pnpm db:seed --reset            # base de datos con datos de demostración
+pnpm run build && pnpm start    # http://localhost:3000
 ```
 
 Usuarios de demostración (solo con `db:seed` sin `--bootstrap-only`): `admin@minifactory.cl / admin1234`, `operador@minifactory.cl` y `ventas@minifactory.cl` / `taller1234`.
 
-Para una instalación real, **no definas `ADMIN_PASSWORD`**: usa `npm run db:seed -- --bootstrap-only` y completa la cuenta de administrador desde el asistente `/bienvenida` con el código de un solo uso que se imprime en la consola (igual que en la instalación con Docker).
+Para una instalación real, **no definas `ADMIN_PASSWORD`**: usa `pnpm db:seed --bootstrap-only` y completa la cuenta de administrador desde el asistente `/bienvenida` con el código de un solo uso que se imprime en la consola (igual que en la instalación con Docker).
 
 Sin `DATABASE_URL` se usa PGlite (Postgres embebido en `./data/pgdata`): no hay nada que instalar. Con `DATABASE_URL=postgres://…` usa un Postgres normal. Las migraciones se aplican solas al iniciar.
 
 ## Pruebas
 
 ```bash
-npm test                 # unitarias + integración (incluye laminado real si OrcaSlicer está instalado)
-npm run build && npm run test:e2e   # usabilidad con Playwright; genera capturas y videos en docs/reporte
+pnpm test                # unitarias + integración (incluye laminado real si OrcaSlicer está instalado)
+pnpm run build && pnpm run test:e2e   # usabilidad con Playwright; genera capturas y videos en docs/reporte
 ```
 
 ## Laminar en el servidor
@@ -283,7 +283,7 @@ La interfaz está disponible en **español** (idioma por defecto) e **inglés**.
 - Errores de bajo nivel (sin petición HTTP, como los conectores) usan `LocalizedError`; el texto queda en español para los registros y se traduce al idioma de la petición cuando se muestra al usuario.
 - Los textos que se guardan en la base (notas, avisos, datos de demostración y plantillas por defecto) se escriben en el idioma de quien los crea y no se traducen después.
 - Moneda, números y fechas siguen la convención del taller (CLP, `es-CL`, `dd-mm-aaaa`) en todos los idiomas.
-- Para agregar un idioma: añadirlo en `src/i18n/config.ts`, crear `src/i18n/<código>/` con el mismo árbol y registrarlo en `src/i18n/translate.ts`. `npm test` comprueba que no falten claves ni parámetros.
+- Para agregar un idioma: añadirlo en `src/i18n/config.ts`, crear `src/i18n/<código>/` con el mismo árbol y registrarlo en `src/i18n/translate.ts`. `pnpm test` comprueba que no falten claves ni parámetros.
 
 ## Conector Bambu Lab (modo LAN)
 
@@ -291,14 +291,14 @@ Máquinas → **Conectar impresoras**: detecta las Bambu Lab de la red (SSDP), p
 
 - Protocolo: MQTT con TLS (8883), cámara JPEG por TLS (6000, P1/A1) o RTSPS (322, X1/H2, requiere ffmpeg), FTPS implícito (990). Todo dentro de la red local.
 - El código de acceso se guarda cifrado (AES-256-GCM con llave derivada de `SESSION_SECRET`) y la huella del certificado se fija en la primera conexión.
-- Simulador para desarrollo: `npx tsx scripts/bambu-sim.ts` (P1S, A1 y X1C falsas; códigos y puertos en la salida). Con `BAMBU_SIM_SSDP_TARGETS=127.0.0.1:2021` anuncia al puerto que escucha la app.
+- Simulador para desarrollo: `pnpm exec tsx scripts/bambu-sim.ts` (P1S, A1 y X1C falsas; códigos y puertos en la salida). Con `BAMBU_SIM_SSDP_TARGETS=127.0.0.1:2021` anuncia al puerto que escucha la app.
 - **Modo nube (Bambu Cloud):** inicia sesión con la cuenta de Bambu Lab (contraseña → código por correo o 2FA; la contraseña no se guarda, el token queda cifrado y dura ~3 meses). Permite ver en vivo, desde cualquier red, las impresoras de la cuenta (estado, capas, temperaturas, AMS, avisos) y la miniatura de la placa del trabajo. Es **solo lectura**: el firmware actual de Bambu Lab rechaza el control desde programas externos por la nube y no ofrece cámara en vivo. La cuenta también entrega el código LAN de cada impresora, así que se pueden conectar por LAN sin ir a la pantalla.
-- La API de la nube no es oficial (documentada por la comunidad: ha-bambulab, OpenBambuAPI); Bambu Lab puede cambiarla. Para pruebas: `BAMBU_SIM_CLOUD_API_PORT=18080 npx tsx scripts/bambu-sim.ts` levanta también una nube simulada y la app se apunta a ella con `BAMBU_CLOUD_API`, `BAMBU_CLOUD_WEB`, `BAMBU_CLOUD_MQTT` y `BAMBU_CLOUD_CA_FILE`.
+- La API de la nube no es oficial (documentada por la comunidad: ha-bambulab, OpenBambuAPI); Bambu Lab puede cambiarla. Para pruebas: `BAMBU_SIM_CLOUD_API_PORT=18080 pnpm exec tsx scripts/bambu-sim.ts` levanta también una nube simulada y la app se apunta a ella con `BAMBU_CLOUD_API`, `BAMBU_CLOUD_WEB`, `BAMBU_CLOUD_MQTT` y `BAMBU_CLOUD_CA_FILE`.
 - Probado contra el simulador; antes de confiar en «Enviar a imprimir» pruébalo con tu impresora real y una pieza pequeña (ver `docs/reporte`).
 
 ## IA opcional (Fases 0 y 1)
 
-Apagada por defecto. Se configura en **Configuración → Inteligencia artificial**: proveedor (lista preconfigurada —Ollama, LM Studio, llama.cpp, vLLM, Jan, Anthropic, Ollama Cloud, OpenAI, OpenRouter, Groq, Gemini, Mistral, Together, DeepSeek— o uno **genérico** compatible con OpenAI o con Anthropic; el botón **Buscar IA local** detecta servidores en este equipo, o en otro equipo de tu red si escribes su dirección, y **Cargar modelos** lista y sugiere los modelos), clave (cifrada), modelos, funciones por rol, privacidad (ocultar datos personales, imágenes, «solo local»), tope de gasto y consumo. Mientras esté apagada no hay controles de IA ni llamadas de red. `AI_FORCE_DISABLED=1` la apaga siempre. La infraestructura está en `src/lib/ai`. Funciones disponibles: **asesor de perfiles de impresión** (Laminador → «Mejorar con IA»: propone candidatos, los lamina de verdad con OrcaSlicer, los compara y guarda el elegido como nueva versión del perfil) y **explicación de errores de laminado**. Sin IA, cada perfil muestra igualmente su **ficha de desempeño** con los trabajos reales y las reglas de «qué probar». Diseño completo en `docs/spec-ia.md`. Para desarrollo: `npx tsx scripts/ai-sim.ts` levanta un proveedor simulado en `http://127.0.0.1:18090`.
+Apagada por defecto. Se configura en **Configuración → Inteligencia artificial**: proveedor (lista preconfigurada —Ollama, LM Studio, llama.cpp, vLLM, Jan, Anthropic, Ollama Cloud, OpenAI, OpenRouter, Groq, Gemini, Mistral, Together, DeepSeek— o uno **genérico** compatible con OpenAI o con Anthropic; el botón **Buscar IA local** detecta servidores en este equipo, o en otro equipo de tu red si escribes su dirección, y **Cargar modelos** lista y sugiere los modelos), clave (cifrada), modelos, funciones por rol, privacidad (ocultar datos personales, imágenes, «solo local»), tope de gasto y consumo. Mientras esté apagada no hay controles de IA ni llamadas de red. `AI_FORCE_DISABLED=1` la apaga siempre. La infraestructura está en `src/lib/ai`. Funciones disponibles: **asesor de perfiles de impresión** (Laminador → «Mejorar con IA»: propone candidatos, los lamina de verdad con OrcaSlicer, los compara y guarda el elegido como nueva versión del perfil) y **explicación de errores de laminado**. Sin IA, cada perfil muestra igualmente su **ficha de desempeño** con los trabajos reales y las reglas de «qué probar». Diseño completo en `docs/spec-ia.md`. Para desarrollo: `pnpm exec tsx scripts/ai-sim.ts` levanta un proveedor simulado en `http://127.0.0.1:18090`.
 
 ## Documentación
 

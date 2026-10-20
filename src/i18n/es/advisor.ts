@@ -29,7 +29,7 @@ export const advisor = {
     pickProcessForMachine: 'Elige un perfil hecho para esa impresora y boquilla, o configúralo de nuevo en Laminador → Configurar laminado.',
     timeout: 'El laminado tardó demasiado y se cortó.',
     timeoutCopies: 'Prueba con menos copias, una malla más simple o pide al administrador subir ORCA_TIMEOUT_S.',
-    notInstalled: 'OrcaSlicer no está instalado en el servidor. Pide al administrador ejecutar «npm run orca:install».',
+    notInstalled: 'OrcaSlicer no está instalado en el servidor. Pide al administrador ejecutar «pnpm run orca:install».',
     askAi: 'Explicar con IA',
     asking: 'Analizando…',
     aiTitle: 'Explicación de la IA',

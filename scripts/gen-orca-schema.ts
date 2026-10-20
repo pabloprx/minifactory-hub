@@ -1,6 +1,6 @@
 /**
  * Genera `data/orca-schema.json` (esquema ampliado de parámetros) desde el código fuente de OrcaSlicer de la versión instalada.
- * No se versiona (OrcaSlicer es AGPL-3.0). Se ejecuta al final de `npm run orca:install`; si no hay red, el esquema curado sigue funcionando.
+ * No se versiona (OrcaSlicer es AGPL-3.0). Se ejecuta al final de `pnpm run orca:install`; si no hay red, el esquema curado sigue funcionando.
  */
 import fs from 'node:fs';
 import path from 'node:path';
